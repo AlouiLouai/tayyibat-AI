@@ -56,7 +56,7 @@ export default function HomePage() {
             <div className="space-y-2 border-2 border-border p-4 md:col-span-3">
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-muted-foreground">تكريم</p>
               <p className="text-2xl font-black leading-10 md:text-3xl">
-                هذا العمل هو تكريم لمسيرة الدكتور ورسالته في نشر "نظام الطيبات" للاستشفاء.
+                هذا العمل هو تكريم لمسيرة الدكتور ورسالته في نشر &quot;نظام الطيبات&quot; للاستشفاء.
               </p>
             </div>
             <div className="space-y-2 border-2 border-border p-4">
