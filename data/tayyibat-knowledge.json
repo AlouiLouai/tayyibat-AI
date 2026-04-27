@@ -1,0 +1,594 @@
+[
+  {
+    "food_item_ar": "السلطة",
+    "status": "Forbidden",
+    "category_ar": "خضار نيء",
+    "explanation_ar": "السلطة النيئة تدخل ضمن الألياف الخام والورقيات التي يراها النظام مرهقة للهضم ومؤذية للقولون والالتهابات.",
+    "alternative_ar": "كوسة مطبوخة أو بامية مطبوخة أو باذنجان مطبوخ",
+    "search_text_ar": "سلطة خضار نيئة خس خيار جرجير ألياف خام لكتينات القولون التهابات ارتجاع"
+  },
+  {
+    "food_item_ar": "الخضار النيء",
+    "status": "Forbidden",
+    "category_ar": "خضار نيء",
+    "explanation_ar": "الخضار النيء والورقيات تعتبر في منطق النظام حملاً هضمياً قاسياً بسبب الألياف الصعبة واللكتينات.",
+    "alternative_ar": "خضار مطبوخ بكمية محدودة",
+    "search_text_ar": "خضار نيء ورقيات ألياف خام لكتينات ميكروبيوم القولون ارتجاع"
+  },
+  {
+    "food_item_ar": "الخيار",
+    "status": "Forbidden",
+    "category_ar": "خضار نيء",
+    "explanation_ar": "الخيار النيء من الخضروات التي يوصي النظام بالامتناع عنها لتخفيف الألياف الخام عن الجهاز الهضمي.",
+    "alternative_ar": "كوسة مطبوخة",
+    "search_text_ar": "خيار خضار نيء ألياف خام قولون"
+  },
+  {
+    "food_item_ar": "الخس",
+    "status": "Forbidden",
+    "category_ar": "خضار نيء",
+    "explanation_ar": "الخس من الورقيات النيئة التي يعتبرها النظام مرهقة للهضم ومؤذية للمحرك الهضمي.",
+    "alternative_ar": "بامية مطبوخة",
+    "search_text_ar": "خس ورقيات نيئة ألياف خام"
+  },
+  {
+    "food_item_ar": "الجرجير",
+    "status": "Forbidden",
+    "category_ar": "خضار نيء",
+    "explanation_ar": "الجرجير يدخل ضمن الورقيات النيئة الممنوعة لكونه صعب الهضم في منطق النظام.",
+    "alternative_ar": "باذنجان مطبوخ",
+    "search_text_ar": "جرجير ورقيات نيئة لكتينات"
+  },
+  {
+    "food_item_ar": "البروكلي",
+    "status": "Forbidden",
+    "category_ar": "خضار نيء",
+    "explanation_ar": "البروكلي النيء مرفوض لأن الألياف الصعبة فيه تعاكس قاعدة سهل المضغ وسهل الهضم.",
+    "alternative_ar": "كوسة مطبوخة",
+    "search_text_ar": "بروكلي نيء ألياف صعبة هضم"
+  },
+  {
+    "food_item_ar": "الملوخية",
+    "status": "Forbidden",
+    "category_ar": "ورقيات",
+    "explanation_ar": "الملوخية تدخل ضمن الورقيات التي لا يوصي بها النظام بسبب العبء الليفي على الهضم.",
+    "alternative_ar": "أرز أو بطاطس",
+    "search_text_ar": "ملوخية ورقيات ألياف قولون"
+  },
+  {
+    "food_item_ar": "السبانخ",
+    "status": "Forbidden",
+    "category_ar": "ورقيات",
+    "explanation_ar": "السبانخ من الورقيات التي يعتبرها النظام غير مناسبة أثناء الامتناع والاستشفاء.",
+    "alternative_ar": "بامية مطبوخة",
+    "search_text_ar": "سبانخ ورقيات ألياف"
+  },
+  {
+    "food_item_ar": "ورق العنب",
+    "status": "Forbidden",
+    "category_ar": "ورقيات",
+    "explanation_ar": "ورق العنب من الأوراق الليفية الثقيلة على الهضم في منطق الدكتور ضياء.",
+    "alternative_ar": "محشي أرز خال من الورق الليفي الثقيل",
+    "search_text_ar": "ورق عنب ورقيات ألياف صعبة"
+  },
+  {
+    "food_item_ar": "ورق الكرنب",
+    "status": "Forbidden",
+    "category_ar": "ورقيات",
+    "explanation_ar": "ورق الكرنب من الورقيات التي يوصي النظام بالابتعاد عنها لأنها صعبة على القولون والهضم.",
+    "alternative_ar": "أرز أو بطاطس",
+    "search_text_ar": "كرنب ورق كرنب ورقيات قولون"
+  },
+  {
+    "food_item_ar": "الخبز البلدي",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "الخبز البلدي من المخبوزات المعتمدة على الدقيق والجلوتين التي يربطها النظام بالالتهابات واضطراب القولون وارتجاع المريء.",
+    "alternative_ar": "توست بالردة ريتش بيك",
+    "search_text_ar": "خبز بلدي عيش دقيق أبيض جلوتين التهاب قولون ارتجاع"
+  },
+  {
+    "food_item_ar": "الفينو",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "الفينو من خبز الدقيق الأبيض الممنوع في النظام لأنه يرهق الهضم ويخالف الامتناع.",
+    "alternative_ar": "توست بالردة ريتش بيك",
+    "search_text_ar": "فينو خبز دقيق أبيض جلوتين"
+  },
+  {
+    "food_item_ar": "الخبز الشامي",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "الخبز الشامي من المخبوزات الممنوعة بسبب الجلوتين والدقيق الأبيض.",
+    "alternative_ar": "توست بالردة ريتش بيك",
+    "search_text_ar": "خبز شامي خبز عربي جلوتين دقيق"
+  },
+  {
+    "food_item_ar": "الخبز السوري",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "الخبز السوري يدخل ضمن مجموعة الخبز الممنوع لأنه قائم على الدقيق والجلوتين.",
+    "alternative_ar": "توست بالردة ريتش بيك",
+    "search_text_ar": "خبز سوري دقيق جلوتين"
+  },
+  {
+    "food_item_ar": "الكيزر",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "الكيزر من المخبوزات البيضاء الممنوعة لأنها لا تخدم الاستشفاء في منطق النظام.",
+    "alternative_ar": "أرز أو بطاطس أو توست بالردة",
+    "search_text_ar": "كيزر خبز دقيق أبيض"
+  },
+  {
+    "food_item_ar": "الكرواسون",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "الكرواسون من المعجنات الثقيلة المعتمدة على الدقيق الأبيض والممنوعة في النظام.",
+    "alternative_ar": "توست بالردة مع زبدة طبيعية",
+    "search_text_ar": "كرواسون معجنات دقيق أبيض جلوتين"
+  },
+  {
+    "food_item_ar": "المكرونة",
+    "status": "Forbidden",
+    "category_ar": "نشويات ممنوعة",
+    "explanation_ar": "المكرونة بكل أنواعها ممنوعة حتى لو كانت من الشوفان أو القمح الكامل لأنها تبقى ضمن منطق الدقيق والجلوتين.",
+    "alternative_ar": "أرز أو بطاطس",
+    "search_text_ar": "مكرونة باستا شوفان قمح كامل دقيق جلوتين"
+  },
+  {
+    "food_item_ar": "البيتزا",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "البيتزا تجمع الدقيق والألبان معاً لذلك تعتبر مخالفة مباشرة لمنطق الامتناع.",
+    "alternative_ar": "أرز مع لحم ضاني أو سمك",
+    "search_text_ar": "بيتزا دقيق جبن ألبان جلوتين كازين"
+  },
+  {
+    "food_item_ar": "الفطير",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "الفطير من المعجنات الممنوعة لارتباطه بالدقيق الأبيض وثقل الهضم.",
+    "alternative_ar": "توست بالردة أو بطاطس",
+    "search_text_ar": "فطير معجنات دقيق"
+  },
+  {
+    "food_item_ar": "الكعك",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "الكعك من المخبوزات الممنوعة لأنه قائم على الدقيق الأبيض ويعطل الاستشفاء.",
+    "alternative_ar": "بسبوسة بدون زبادي",
+    "search_text_ar": "كعك دقيق أبيض جلوتين"
+  },
+  {
+    "food_item_ar": "البسكويت",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "البسكويت من المخبوزات الممنوعة لوجود الدقيق والجلوتين ضمن أساسه.",
+    "alternative_ar": "حلاوة طحينية أو شوكولاتة",
+    "search_text_ar": "بسكويت دقيق جلوتين"
+  },
+  {
+    "food_item_ar": "السينابون",
+    "status": "Forbidden",
+    "category_ar": "مخبوزات",
+    "explanation_ar": "السينابون من المعجنات المحملة بالدقيق ومرفوض في النظام.",
+    "alternative_ar": "بسبوسة بدون زبادي",
+    "search_text_ar": "سينابون معجنات دقيق أبيض"
+  },
+  {
+    "food_item_ar": "الدقيق الأبيض",
+    "status": "Forbidden",
+    "category_ar": "مكون ممنوع",
+    "explanation_ar": "الدقيق الأبيض يمثل عند النظام مصدراً أساسياً للالتهاب واضطراب القولون والارتجاع ويجب الامتناع عنه.",
+    "alternative_ar": "أرز أو بطاطس أو توست بالردة ريتش بيك",
+    "search_text_ar": "دقيق أبيض جلوتين التهابات قولون ارتجاع"
+  },
+  {
+    "food_item_ar": "الجلوتين",
+    "status": "Forbidden",
+    "category_ar": "مكون ممنوع",
+    "explanation_ar": "الجلوتين مرتبط في منطق النظام بتهيج الأمعاء والتهابات مزمنة وتعطيل الاستشفاء.",
+    "alternative_ar": "أرز أو بطاطس",
+    "search_text_ar": "جلوتين التهاب قولون ارتجاع ميكروبيوم"
+  },
+  {
+    "food_item_ar": "اللبن الحليب",
+    "status": "Forbidden",
+    "category_ar": "ألبان",
+    "explanation_ar": "الحليب من الألبان الممنوعة بسبب الكازين وثقل الهضم وفق النظام.",
+    "alternative_ar": "قشطة أو زبدة طبيعية عند الحاجة",
+    "search_text_ar": "لبن حليب كازين ألبان التهاب"
+  },
+  {
+    "food_item_ar": "الزبادي",
+    "status": "Forbidden",
+    "category_ar": "ألبان",
+    "explanation_ar": "الزبادي من منتجات الألبان الممنوعة لأن الكازين فيها يرهق الهضم في هذا النظام.",
+    "alternative_ar": "قشطة أو جبن مطبوخ يسيح",
+    "search_text_ar": "زبادي ألبان كازين"
+  },
+  {
+    "food_item_ar": "الرايب",
+    "status": "Forbidden",
+    "category_ar": "ألبان",
+    "explanation_ar": "الرايب من الألبان الممنوعة بسبب الكازين وصعوبة الهضم.",
+    "alternative_ar": "قشطة",
+    "search_text_ar": "رايب ألبان كازين"
+  },
+  {
+    "food_item_ar": "الجبنة البيضاء",
+    "status": "Forbidden",
+    "category_ar": "ألبان",
+    "explanation_ar": "الجبنة البيضاء مرفوضة لأنها من أصعب أشكال الألبان هضماً بحسب منطق النظام.",
+    "alternative_ar": "جبن رومي أو شيدر يسيح في الميكروويف",
+    "search_text_ar": "جبنة بيضاء جبن أبيض ألبان كازين"
+  },
+  {
+    "food_item_ar": "الجبنة القريش",
+    "status": "Forbidden",
+    "category_ar": "ألبان",
+    "explanation_ar": "الجبنة القريش ممنوعة لأنها ثقيلة الهضم وتدخل ضمن منتجات الكازين التي يرفضها النظام.",
+    "alternative_ar": "جبن جودة أو شيدر مطبوخ",
+    "search_text_ar": "جبنة قريش ألبان كازين"
+  },
+  {
+    "food_item_ar": "الألبان",
+    "status": "Forbidden",
+    "category_ar": "مكون ممنوع",
+    "explanation_ar": "الألبان والكازين مرتبطان في النظام باضطراب الهضم والقولون والالتهابات ويجب الامتناع عنهما.",
+    "alternative_ar": "دهون طبيعية أو جبن مطبوخ يسيح",
+    "search_text_ar": "ألبان كازين التهاب قولون ارتجاع"
+  },
+  {
+    "food_item_ar": "البيض",
+    "status": "Forbidden",
+    "category_ar": "بروتين ممنوع",
+    "explanation_ar": "البيض بكل أشكاله ممنوع في النظام لأنه لا ينسجم مع قاعدة الهضم السهل والاستشفاء.",
+    "alternative_ar": "كبدة أو لحم ضاني أو سمك بلطي",
+    "search_text_ar": "بيض مسلوق مقلي شكشوكة بروتين ممنوع"
+  },
+  {
+    "food_item_ar": "الفول",
+    "status": "Forbidden",
+    "category_ar": "بقوليات",
+    "explanation_ar": "الفول من البقوليات الثقيلة الممنوعة لأنها مرهقة للقولون والهضم في منطق النظام.",
+    "alternative_ar": "أرز أو بطاطس",
+    "search_text_ar": "فول بقوليات قولون انتفاخ"
+  },
+  {
+    "food_item_ar": "العدس",
+    "status": "Forbidden",
+    "category_ar": "بقوليات",
+    "explanation_ar": "العدس ممنوع عموماً لأنه من البقوليات الثقيلة التي تعيق راحة الجهاز الهضمي.",
+    "alternative_ar": "أرز أو بطاطس أو كبدة",
+    "search_text_ar": "عدس بقوليات انتفاخ قولون"
+  },
+  {
+    "food_item_ar": "العدس الأصفر",
+    "status": "Caution",
+    "category_ar": "بقوليات",
+    "explanation_ar": "العدس الأصفر مسموح نادراً في الشتاء فقط، لذلك يعد حالة احتياط لا سماحاً مفتوحاً.",
+    "alternative_ar": "أرز أو بطاطس",
+    "search_text_ar": "عدس أصفر شتاء فقط نادرا احتياط"
+  },
+  {
+    "food_item_ar": "الفاصوليا البيضاء",
+    "status": "Forbidden",
+    "category_ar": "بقوليات",
+    "explanation_ar": "الفاصوليا البيضاء من البقوليات الممنوعة لثقلها على الهضم والقولون.",
+    "alternative_ar": "بطاطس أو أرز",
+    "search_text_ar": "فاصوليا بيضاء بقوليات"
+  },
+  {
+    "food_item_ar": "اللوبيا",
+    "status": "Forbidden",
+    "category_ar": "بقوليات",
+    "explanation_ar": "اللوبيا من البقوليات التي لا يوصي بها النظام بسبب ثقلها الهضمي.",
+    "alternative_ar": "أرز أو بطاطس",
+    "search_text_ar": "لوبيا بقوليات"
+  },
+  {
+    "food_item_ar": "المياه الغازية",
+    "status": "Forbidden",
+    "category_ar": "مشروبات",
+    "explanation_ar": "المشروبات الغازية بكل أنواعها مرفوضة لأنها تضر بالمحرك الهضمي ولا تخدم الاستشفاء.",
+    "alternative_ar": "عصير مصفى أو ماء عند العطش فقط",
+    "search_text_ar": "مياه غازية صودا دايت مشروبات"
+  },
+  {
+    "food_item_ar": "مشروبات الطاقة",
+    "status": "Forbidden",
+    "category_ar": "مشروبات",
+    "explanation_ar": "مشروبات الطاقة ممنوعة لأنها تجهد الجسم والهضم وتخالف الامتناع.",
+    "alternative_ar": "عصير مصفى",
+    "search_text_ar": "مشروب طاقة انرجي درينك"
+  },
+  {
+    "food_item_ar": "مشروبات الشعير",
+    "status": "Forbidden",
+    "category_ar": "مشروبات",
+    "explanation_ar": "مشروبات الشعير غير موصى بها لأنها لا تتسق مع منطق النظام الغذائي.",
+    "alternative_ar": "عصير مصفى",
+    "search_text_ar": "شعير مشروب شعير"
+  },
+  {
+    "food_item_ar": "الإسراف في شرب الماء",
+    "status": "Caution",
+    "category_ar": "مشروبات",
+    "explanation_ar": "النظام ينصح بالشرب عند العطش فقط، لذلك الإفراط في الماء يعد مخالفة تشغيلية لا عادة صحية مطلقة.",
+    "alternative_ar": "الماء عند العطش فقط",
+    "search_text_ar": "شرب ماء كثير إفراط في الماء عند العطش فقط"
+  },
+  {
+    "food_item_ar": "الزيوت النباتية",
+    "status": "Forbidden",
+    "category_ar": "دهون",
+    "explanation_ar": "زيوت البذور مثل دوار الشمس والذرة مرفوضة في النظام ويستبدل بها زيت الزيتون أو السمن.",
+    "alternative_ar": "زيت زيتون أو سمن بلدي",
+    "search_text_ar": "زيوت نباتية زيوت بذور دوار الشمس زيت ذرة"
+  },
+  {
+    "food_item_ar": "الدواجن",
+    "status": "Forbidden",
+    "category_ar": "بروتين",
+    "explanation_ar": "الدواجن مثل الفراخ والبط والرومي والوز ممنوعة في هذا النظام.",
+    "alternative_ar": "لحم ضاني أو حمام أو سمان",
+    "search_text_ar": "دواجن فراخ دجاج بط رومي وز"
+  },
+  {
+    "food_item_ar": "الجمبري",
+    "status": "Forbidden",
+    "category_ar": "مأكولات بحرية",
+    "explanation_ar": "الجمبري مرفوض في النظام ويستبدل بالأسماك المسموحة مثل البلطي والبوري.",
+    "alternative_ar": "بلطي أو بوري",
+    "search_text_ar": "جمبري روبيان مأكولات بحرية"
+  },
+  {
+    "food_item_ar": "السبيط",
+    "status": "Forbidden",
+    "category_ar": "مأكولات بحرية",
+    "explanation_ar": "السبيط من الممنوعات البحرية في النظام.",
+    "alternative_ar": "سمك بلطي أو بوري",
+    "search_text_ar": "سبيط كاليماري"
+  },
+  {
+    "food_item_ar": "الكابوريا",
+    "status": "Forbidden",
+    "category_ar": "مأكولات بحرية",
+    "explanation_ar": "الكابوريا من المأكولات البحرية المرفوضة في منطق النظام.",
+    "alternative_ar": "سمك قشر بياض أو بلطي",
+    "search_text_ar": "كابوريا سلطعون"
+  },
+  {
+    "food_item_ar": "توست بالردة ريتش بيك",
+    "status": "Allowed",
+    "category_ar": "نشويات أساسية",
+    "explanation_ar": "هذا هو الخبز الوحيد المسموح به في النظام ويفضل تحميصه بزيت الزيتون أو الزبدة الطبيعية.",
+    "alternative_ar": "توست بالردة ريتش بيك",
+    "search_text_ar": "توست بالردة ريتش بيك خبز مسموح"
+  },
+  {
+    "food_item_ar": "الأرز",
+    "status": "Allowed",
+    "category_ar": "نشويات أساسية",
+    "explanation_ar": "الأرز من مصادر الطاقة الأساسية المسموحة لأنه سهل نسبياً على الهضم في منطق النظام.",
+    "alternative_ar": "الأرز",
+    "search_text_ar": "أرز أبيض بسمتي محشي نشويات طاقة"
+  },
+  {
+    "food_item_ar": "البطاطس",
+    "status": "Allowed",
+    "category_ar": "نشويات أساسية",
+    "explanation_ar": "البطاطس مسموحة مسلوقة أو محمرة أو بيوريه لأنها ضمن النشويات الأساسية السهلة نسبياً.",
+    "alternative_ar": "البطاطس",
+    "search_text_ar": "بطاطس مسلوقة محمرة بيوريه"
+  },
+  {
+    "food_item_ar": "البطاطا",
+    "status": "Allowed",
+    "category_ar": "نشويات أساسية",
+    "explanation_ar": "البطاطا من النشويات المسموحة كمصدر طاقة سهل نسبياً.",
+    "alternative_ar": "البطاطا",
+    "search_text_ar": "بطاطا حلوة"
+  },
+  {
+    "food_item_ar": "القلقاس",
+    "status": "Allowed",
+    "category_ar": "نشويات أساسية",
+    "explanation_ar": "القلقاس من النشويات المسموحة ضمن بدائل الطاقة في النظام.",
+    "alternative_ar": "القلقاس",
+    "search_text_ar": "قلقاس"
+  },
+  {
+    "food_item_ar": "زيت الزيتون",
+    "status": "Allowed",
+    "category_ar": "دهون طبيعية",
+    "explanation_ar": "زيت الزيتون هو الأفضل في النظام ويعد الدهون الأساسية المفضلة.",
+    "alternative_ar": "زيت الزيتون",
+    "search_text_ar": "زيت زيتون دهون طبيعية"
+  },
+  {
+    "food_item_ar": "الزبدة الطبيعية",
+    "status": "Allowed",
+    "category_ar": "دهون طبيعية",
+    "explanation_ar": "الزبدة الطبيعية من الدهون المسموحة وتستخدم مع النشويات المسموحة.",
+    "alternative_ar": "الزبدة الطبيعية",
+    "search_text_ar": "زبدة طبيعية"
+  },
+  {
+    "food_item_ar": "السمن البلدي",
+    "status": "Allowed",
+    "category_ar": "دهون طبيعية",
+    "explanation_ar": "السمن البلدي من الدهون المسموحة والمفضلة بدلاً من الزيوت النباتية.",
+    "alternative_ar": "السمن البلدي",
+    "search_text_ar": "سمن بلدي"
+  },
+  {
+    "food_item_ar": "القشطة",
+    "status": "Allowed",
+    "category_ar": "دهون طبيعية",
+    "explanation_ar": "القشطة من الدهون الطبيعية المسموحة في النظام.",
+    "alternative_ar": "القشطة",
+    "search_text_ar": "قشطة"
+  },
+  {
+    "food_item_ar": "اللحم الضاني",
+    "status": "Allowed",
+    "category_ar": "بروتين حيواني",
+    "explanation_ar": "اللحم الضاني هو البروتين الحيواني الأفضل في النظام لأنه أوفق للهضم من البدائل الممنوعة.",
+    "alternative_ar": "اللحم الضاني",
+    "search_text_ar": "لحم ضاني خروف بروتين"
+  },
+  {
+    "food_item_ar": "لحم الماعز",
+    "status": "Allowed",
+    "category_ar": "بروتين حيواني",
+    "explanation_ar": "لحم الماعز من البروتينات المسموحة في النظام.",
+    "alternative_ar": "لحم الماعز",
+    "search_text_ar": "لحم ماعز بروتين"
+  },
+  {
+    "food_item_ar": "الحمام",
+    "status": "Allowed",
+    "category_ar": "بروتين حيواني",
+    "explanation_ar": "الحمام من البروتينات الحيوانية المسموحة.",
+    "alternative_ar": "الحمام",
+    "search_text_ar": "حمام بروتين"
+  },
+  {
+    "food_item_ar": "السمان",
+    "status": "Allowed",
+    "category_ar": "بروتين حيواني",
+    "explanation_ar": "السمان من البروتينات المسموحة ضمن النظام.",
+    "alternative_ar": "السمان",
+    "search_text_ar": "سمان بروتين"
+  },
+  {
+    "food_item_ar": "الكبدة",
+    "status": "Allowed",
+    "category_ar": "بروتين حيواني",
+    "explanation_ar": "الكبدة بكل أنواعها ما عدا كبدة الدواجن مسموحة لأنها بديل بروتيني مباشر في النظام.",
+    "alternative_ar": "الكبدة",
+    "search_text_ar": "كبدة كبدة بقري كبدة ضاني ممنوع فقط كبدة الدواجن"
+  },
+  {
+    "food_item_ar": "الأسماك",
+    "status": "Allowed",
+    "category_ar": "بروتين حيواني",
+    "explanation_ar": "الأسماك المسموحة مثل قشر البياض والبوري والبلطي والسمك الجملي بدائل بروتينية جيدة في منطق النظام.",
+    "alternative_ar": "الأسماك المسموحة",
+    "search_text_ar": "سمك قشر بياض بوري بلطي سمك جملي"
+  },
+  {
+    "food_item_ar": "الجبن المطبوخ",
+    "status": "Allowed",
+    "category_ar": "أجبان مطبوخة",
+    "explanation_ar": "الجبن الذي يسيح في الميكروويف مثل الرومي والشيدر والجودة والفلامنك والمثلثات والكاسات مسموح.",
+    "alternative_ar": "جبن مطبوخ يسيح",
+    "search_text_ar": "جبن مطبوخ رومي شيدر جودة فلامنك مثلثات كاسات"
+  },
+  {
+    "food_item_ar": "العسل",
+    "status": "Allowed",
+    "category_ar": "حلويات وسكريات",
+    "explanation_ar": "العسل الأبيض أو الأسود من السكريات المسموحة في النظام.",
+    "alternative_ar": "العسل",
+    "search_text_ar": "عسل أبيض عسل أسود"
+  },
+  {
+    "food_item_ar": "السكر الأبيض",
+    "status": "Allowed",
+    "category_ar": "حلويات وسكريات",
+    "explanation_ar": "السكر الأبيض مذكور ضمن السكريات المسموحة في النظام.",
+    "alternative_ar": "السكر الأبيض",
+    "search_text_ar": "سكر أبيض"
+  },
+  {
+    "food_item_ar": "حلاوة طحينية",
+    "status": "Allowed",
+    "category_ar": "حلويات وسكريات",
+    "explanation_ar": "الحلاوة الطحينية الغامقة أو السايبة من الحلويات المسموحة.",
+    "alternative_ar": "حلاوة طحينية",
+    "search_text_ar": "حلاوة طحينية غامقة سايبة"
+  },
+  {
+    "food_item_ar": "الشوكولاتة",
+    "status": "Allowed",
+    "category_ar": "حلويات وسكريات",
+    "explanation_ar": "الشوكولاتة والنوتيلا مذكورتان ضمن المسموحات.",
+    "alternative_ar": "الشوكولاتة",
+    "search_text_ar": "شوكولاتة نوتيلا"
+  },
+  {
+    "food_item_ar": "البسبوسة",
+    "status": "Allowed",
+    "category_ar": "حلويات وسكريات",
+    "explanation_ar": "البسبوسة مسموحة بشرط أن تكون بدون زبادي.",
+    "alternative_ar": "البسبوسة بدون زبادي",
+    "search_text_ar": "بسبوسة بدون زبادي"
+  },
+  {
+    "food_item_ar": "العنب",
+    "status": "Allowed",
+    "category_ar": "فواكه",
+    "explanation_ar": "العنب من الفواكه السكرية المسموحة في النظام.",
+    "alternative_ar": "العنب",
+    "search_text_ar": "عنب فواكه سكرية"
+  },
+  {
+    "food_item_ar": "التين",
+    "status": "Allowed",
+    "category_ar": "فواكه",
+    "explanation_ar": "التين من الفواكه السكرية المسموحة.",
+    "alternative_ar": "التين",
+    "search_text_ar": "تين فواكه سكرية"
+  },
+  {
+    "food_item_ar": "التمر",
+    "status": "Allowed",
+    "category_ar": "فواكه",
+    "explanation_ar": "التمر من الفواكه السكرية المسموحة كمصدر طاقة.",
+    "alternative_ar": "التمر",
+    "search_text_ar": "تمر فواكه سكرية"
+  },
+  {
+    "food_item_ar": "الموز",
+    "status": "Allowed",
+    "category_ar": "فواكه",
+    "explanation_ar": "الموز من الفواكه السكرية المسموحة.",
+    "alternative_ar": "الموز",
+    "search_text_ar": "موز فواكه سكرية"
+  },
+  {
+    "food_item_ar": "العصائر المصفاة",
+    "status": "Allowed",
+    "category_ar": "عصائر",
+    "explanation_ar": "العصائر المعلبة أو الفرش مسموحة ويفضل تصفية الألياف منها.",
+    "alternative_ar": "العصائر المصفاة",
+    "search_text_ar": "عصير عصائر مصفاة بدون ألياف"
+  },
+  {
+    "food_item_ar": "الكوسة المطبوخة",
+    "status": "Caution",
+    "category_ar": "خضار مطبوخ",
+    "explanation_ar": "الكوسة المطبوخة مسموح بها بحدود لأن الطبخ يكسر الألياف الصعبة لكنها ليست أساس النظام.",
+    "alternative_ar": "الكوسة المطبوخة",
+    "search_text_ar": "كوسة مطبوخة خضار مطبوخ بحدود"
+  },
+  {
+    "food_item_ar": "البامية المطبوخة",
+    "status": "Caution",
+    "category_ar": "خضار مطبوخ",
+    "explanation_ar": "البامية المطبوخة مسموحة بحدود لأن الطبخ يقلل العبء الليفي.",
+    "alternative_ar": "البامية المطبوخة",
+    "search_text_ar": "بامية مطبوخة بحدود"
+  },
+  {
+    "food_item_ar": "الباذنجان المطبوخ",
+    "status": "Caution",
+    "category_ar": "خضار مطبوخ",
+    "explanation_ar": "الباذنجان المطبوخ مسموح بحدود فقط وليس استخداماً مفتوحاً.",
+    "alternative_ar": "الباذنجان المطبوخ",
+    "search_text_ar": "باذنجان مطبوخ بحدود"
+  }
+]
