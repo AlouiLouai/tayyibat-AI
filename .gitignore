@@ -1,0 +1,14 @@
+.next/
+node_modules/
+.pnpm-store/
+.env.local
+.env.*.local
+!.env.example
+supabase/
+.opencode-tmp/
+AGENTS.md
+INSTRUCTIONS.md
+SCHEMA.md
+tayyibat_rag.md
+scripts/
+data/
