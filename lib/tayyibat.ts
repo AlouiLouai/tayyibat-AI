@@ -22,12 +22,6 @@ const alternatives = new Map(
   (knowledge as KnowledgeEntry[]).map((entry) => [entry.food_item_ar, entry.alternative_ar])
 );
 
-export function statusLabel(status: MatchRow["status"]) {
-  if (status === "Forbidden") return "ممنوع";
-  if (status === "Caution") return "بحذر";
-  return "مسموح";
-}
-
 export function getAlternative(foodItem: string) {
   return alternatives.get(foodItem) ?? "أرز أو بطاطس أو لحم ضاني";
 }

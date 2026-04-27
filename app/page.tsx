@@ -1,13 +1,93 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 import { AnalyzerForm } from "@/components/analyzer-form";
 import { Badge } from "@/components/ui/badge";
 
+const MOBILE_SPLASH_SESSION_KEY = "tayyibat-mobile-splash-seen";
+
 export default function HomePage() {
+  const [showMobileSplash, setShowMobileSplash] = useState(true);
+
+  useEffect(() => {
+    const isMobileViewport = window.matchMedia("(max-width: 767px)").matches;
+
+    if (!isMobileViewport) {
+      setShowMobileSplash(false);
+      return;
+    }
+
+    if (window.sessionStorage.getItem(MOBILE_SPLASH_SESSION_KEY) === "1") {
+      setShowMobileSplash(false);
+      return;
+    }
+
+    window.sessionStorage.setItem(MOBILE_SPLASH_SESSION_KEY, "1");
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const timeoutId = window.setTimeout(() => {
+      document.body.style.overflow = previousOverflow;
+      setShowMobileSplash(false);
+    }, 3000);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   return (
-    <main className="min-h-screen px-4 py-8 md:px-8 lg:px-10">
-      <div className="mx-auto max-w-7xl space-y-8">
-        <section className="grid gap-6 border-2 border-border bg-black px-6 py-10 text-white shadow-industrial lg:grid-cols-[1.2fr_0.8fr] lg:px-10">
+    <main className="min-h-screen md:px-8 md:py-8 lg:px-10">
+      {showMobileSplash ? (
+        <section className="fixed inset-0 z-50 flex min-h-[100svh] flex-col justify-between bg-black px-4 py-6 text-white shadow-industrial md:hidden">
+          <div className="space-y-5">
+            <Badge variant="destructive" className="w-fit">منهج طيبات 2026</Badge>
+            <h1 className="text-4xl font-black leading-tight">
+              فاحص الوجبات العربي المبني على الرؤية الحاسوبية والبحث الدلالي بنظام الطيبات.
+            </h1>
+            <p className="text-base leading-8 text-white/78">
+              هذا التطبيق إهداء للدكتور ضياء العوضي، ومصمم لخدمة المجتمع الذي بناه حول نظام الطيبات. ستظهر شاشة التحليل تلقائياً بعد لحظات.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="border-2 border-white/20 bg-white/5 p-2">
+              <div className="relative aspect-[4/5] w-full overflow-hidden border-2 border-white/20">
+                <Image
+                  alt="الدكتور ضياء العوضي"
+                  className="object-cover grayscale"
+                  fill
+                  priority
+                  sizes="100vw"
+                  src="/Dhia.jpg"
+                />
+              </div>
+            </div>
+
+            <div className="border-2 border-[#FF5722] bg-[#FF5722]/10 p-4">
+              <p className="text-sm font-black leading-7">
+                هذا العمل هو تكريم لمسيرة الدكتور ورسالته في نشر نظام الطيبات، قبل الانتقال مباشرة إلى رفع الصورة والتحليل.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="h-1.5 w-full overflow-hidden border border-white/20 bg-white/10">
+              <div className="h-full w-full origin-right animate-[mobile-splash-progress_3s_linear_forwards] bg-[#FF5722]" />
+            </div>
+            <p className="text-center text-xs font-bold tracking-[0.2em] text-white/45">
+              LOADING SCANNER
+            </p>
+          </div>
+        </section>
+      ) : null}
+
+      <div className="mx-auto max-w-7xl space-y-6 md:space-y-8">
+        <section className="hidden gap-6 border-2 border-border bg-black px-6 py-10 text-white shadow-industrial md:grid lg:grid-cols-[1.2fr_0.8fr] lg:px-10">
           <div className="space-y-5">
             <Badge variant="destructive" className="w-fit">منهج طيبات 2026</Badge>
             <h1 className="max-w-4xl text-4xl font-black leading-tight md:text-6xl">
@@ -38,7 +118,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="grid gap-6 border-2 border-border bg-card px-6 py-6 shadow-panel lg:grid-cols-[320px_1fr]">
+        <section className="hidden gap-6 border-2 border-border bg-card px-6 py-6 shadow-panel md:grid lg:grid-cols-[320px_1fr]">
           <div className="border-2 border-border bg-black p-2">
             <div className="relative aspect-[4/5] w-full overflow-hidden border-2 border-white/20">
               <Image
@@ -74,7 +154,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <AnalyzerForm />
+        <section id="scan" className="scroll-mt-4 px-4 pb-6 md:px-0 md:pb-0 md:scroll-mt-8">
+          <AnalyzerForm />
+        </section>
       </div>
     </main>
   );

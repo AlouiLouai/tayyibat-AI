@@ -11,6 +11,11 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.config(nextVitals)];
+const eslintConfig = [
+  {
+    ignores: [".next/**"],
+  },
+  ...compat.config(nextVitals),
+];
 
 export default eslintConfig;
