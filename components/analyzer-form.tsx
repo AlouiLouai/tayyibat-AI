@@ -25,13 +25,72 @@ type IngredientMatch = {
 type AnalyzeResponse = {
   meal_name_ar: string;
   ingredients_ar: string[];
-  brief_assessment_ar: string;
   score: number;
   advice: string;
   reason: string;
   alternative: string;
+  healthContext: string;
+  detectedConditions: string[];
   matches: IngredientMatch[];
 };
+
+const MAX_UPLOAD_IMAGE_BYTES = 3 * 1024 * 1024;
+const MAX_INPUT_IMAGE_BYTES = 12 * 1024 * 1024;
+const MAX_IMAGE_DIMENSION = 1024;
+const COMPRESSED_IMAGE_QUALITY = 0.72;
+
+function loadImage(url: string) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new window.Image();
+
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error("تعذر تجهيز الصورة للتحليل."));
+    image.src = url;
+  });
+}
+
+async function compressImage(file: File) {
+  const objectUrl = URL.createObjectURL(file);
+
+  try {
+    const image = await loadImage(objectUrl);
+    const longestSide = Math.max(image.naturalWidth, image.naturalHeight);
+    const scale = longestSide > MAX_IMAGE_DIMENSION ? MAX_IMAGE_DIMENSION / longestSide : 1;
+    const width = Math.max(1, Math.round(image.naturalWidth * scale));
+    const height = Math.max(1, Math.round(image.naturalHeight * scale));
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    if (!context) {
+      return file;
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+    context.drawImage(image, 0, 0, width, height);
+
+    const blob = await new Promise<Blob | null>((resolve) => {
+      canvas.toBlob(resolve, "image/jpeg", COMPRESSED_IMAGE_QUALITY);
+    });
+
+    if (!blob) {
+      return file;
+    }
+
+    if (blob.size >= file.size && scale === 1) {
+      return file;
+    }
+
+    const fileName = file.name.replace(/\.[^.]+$/, "") || "meal";
+
+    return new File([blob], `${fileName}.jpg`, {
+      type: "image/jpeg",
+      lastModified: file.lastModified,
+    });
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
 
 function statusVariant(status: IngredientMatch["match"] extends infer T ? any : never) {
   if (status === "Forbidden") return "destructive" as const;
@@ -46,13 +105,13 @@ function statusLabel(status: "Allowed" | "Forbidden" | "Caution") {
 }
 
 export function AnalyzerForm() {
-  const maxImageBytes = 5 * 1024 * 1024;
   const [file, setFile] = useState<File | null>(null);
   const [note, setNote] = useState("");
   const [result, setResult] = useState<AnalyzeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isPreparingImage, setIsPreparingImage] = useState(false);
 
   useEffect(() => {
     if (!file) {
@@ -126,7 +185,7 @@ export function AnalyzerForm() {
                 id="image"
                 type="file"
                 accept="image/*"
-                onChange={(event) => {
+                onChange={async (event) => {
                   const nextFile = event.target.files?.[0] ?? null;
 
                   if (!nextFile) {
@@ -140,14 +199,29 @@ export function AnalyzerForm() {
                     return;
                   }
 
-                  if (nextFile.size > maxImageBytes) {
+                  if (nextFile.size > MAX_INPUT_IMAGE_BYTES) {
                     setFile(null);
-                    setError("حجم الصورة كبير جداً. الحد الأقصى هو 5 ميجابايت.");
+                    setError("حجم الصورة كبير جداً. ارفع صورة أصغر من 12 ميجابايت.");
                     return;
                   }
 
                   setError(null);
-                  setFile(nextFile);
+                  setIsPreparingImage(true);
+
+                  try {
+                    const optimizedFile = await compressImage(nextFile);
+
+                    if (optimizedFile.size > MAX_UPLOAD_IMAGE_BYTES) {
+                      throw new Error("تعذر ضغط الصورة بما يكفي. جرب صورة أوضح أو أقل حجماً.");
+                    }
+
+                    setFile(optimizedFile);
+                  } catch (imageError) {
+                    setFile(null);
+                    setError(imageError instanceof Error ? imageError.message : "تعذر تجهيز الصورة.");
+                  } finally {
+                    setIsPreparingImage(false);
+                  }
                 }}
               />
             </div>
@@ -156,15 +230,18 @@ export function AnalyzerForm() {
               <Label htmlFor="note">ملاحظة إضافية</Label>
               <Textarea
                 id="note"
-                placeholder="مثال: هذه وجبة فطور أو منتج جبن مطبوخ"
+                placeholder="مثال: مريض سكري، قولون، ارتجاع، أو هذه وجبة فطور / منتج جبن مطبوخ"
                 value={note}
                 onChange={(event) => setNote(event.target.value)}
               />
+              <p className="text-xs leading-6 text-muted-foreground">
+                اذكر الحالة أو الهدف إن وجد، مثل: سكري، قولون، ارتجاع، ضغط، أو حساسية من مكونات محددة.
+              </p>
             </div>
 
-            <Button className="w-full gap-2 text-base shadow-industrial" size="lg" type="submit" disabled={isPending}>
-              {isPending ? <LoaderCircle className="size-5 animate-spin" /> : <ScanSearch className="size-5" />}
-              {isPending ? "جارٍ تحليل الصورة" : "حلل الوجبة الآن"}
+            <Button className="w-full gap-2 text-base shadow-industrial" size="lg" type="submit" disabled={isPending || isPreparingImage}>
+              {isPending || isPreparingImage ? <LoaderCircle className="size-5 animate-spin" /> : <ScanSearch className="size-5" />}
+              {isPreparingImage ? "جارٍ تجهيز الصورة" : isPending ? "جارٍ تحليل الصورة" : "حلل الوجبة الآن"}
             </Button>
 
             {error ? (
@@ -206,6 +283,13 @@ export function AnalyzerForm() {
                   <div className="border-2 border-border p-4">
                     <p className="text-xs font-bold uppercase tracking-[0.25em] text-muted-foreground">الوجبة</p>
                     <p className="mt-2 text-2xl font-black">{result.meal_name_ar}</p>
+                    {result.detectedConditions.length > 0 ? (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {result.detectedConditions.map((condition) => (
+                          <Badge key={condition} variant="caution">{condition}</Badge>
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
 
@@ -216,6 +300,13 @@ export function AnalyzerForm() {
                   </div>
                   <p className="text-sm leading-7">{result.advice}</p>
                 </div>
+
+                {result.healthContext ? (
+                  <div className="space-y-3 border-2 border-[#FF5722]/40 bg-[#FF5722]/5 p-4">
+                    <p className="text-sm font-black">السياق الصحي</p>
+                    <p className="text-sm leading-7 text-muted-foreground">{result.healthContext}</p>
+                  </div>
+                ) : null}
 
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="border-2 border-border p-4">

@@ -7,6 +7,7 @@ import { AnalyzerForm } from "@/components/analyzer-form";
 import { Badge } from "@/components/ui/badge";
 
 const MOBILE_SPLASH_SESSION_KEY = "tayyibat-mobile-splash-seen";
+const MOBILE_SPLASH_DURATION_MS = 1500;
 
 export default function HomePage() {
   const [showMobileSplash, setShowMobileSplash] = useState(true);
@@ -29,10 +30,21 @@ export default function HomePage() {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const timeoutId = window.setTimeout(() => {
+    const closeSplash = () => {
       document.body.style.overflow = previousOverflow;
       setShowMobileSplash(false);
-    }, 3000);
+
+      window.requestAnimationFrame(() => {
+        document.getElementById("scan")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+    };
+
+    const timeoutId = window.setTimeout(() => {
+      closeSplash();
+    }, MOBILE_SPLASH_DURATION_MS);
 
     return () => {
       window.clearTimeout(timeoutId);
@@ -44,18 +56,18 @@ export default function HomePage() {
     <main className="min-h-screen md:px-8 md:py-8 lg:px-10">
       {showMobileSplash ? (
         <section className="fixed inset-0 z-50 flex min-h-[100svh] flex-col justify-between bg-black px-4 py-6 text-white shadow-industrial md:hidden">
-          <div className="space-y-5">
+          <div className="space-y-4">
             <Badge variant="destructive" className="w-fit">منهج طيبات 2026</Badge>
-            <h1 className="text-4xl font-black leading-tight">
-              فاحص الوجبات العربي المبني على الرؤية الحاسوبية والبحث الدلالي بنظام الطيبات.
+            <h1 className="text-2xl font-black leading-tight">
+              فاحص الوجبات العربي بنظام الطيبات.
             </h1>
-            <p className="text-base leading-8 text-white/78">
-              هذا التطبيق إهداء للدكتور ضياء العوضي، ومصمم لخدمة المجتمع الذي بناه حول نظام الطيبات. ستظهر شاشة التحليل تلقائياً بعد لحظات.
+            <p className="max-w-xs text-sm leading-6 text-white/72">
+              إهداء للدكتور ضياء العوضي. سيتم فتح شاشة الفحص خلال لحظات.
             </p>
           </div>
 
-          <div className="space-y-4">
-            <div className="border-2 border-white/20 bg-white/5 p-2">
+          <div className="space-y-3">
+            <div className="mx-auto w-full max-w-[280px] border-2 border-white/20 bg-white/5 p-2">
               <div className="relative aspect-[4/5] w-full overflow-hidden border-2 border-white/20">
                 <Image
                   alt="الدكتور ضياء العوضي"
@@ -68,19 +80,19 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="border-2 border-[#FF5722] bg-[#FF5722]/10 p-4">
-              <p className="text-sm font-black leading-7">
-                هذا العمل هو تكريم لمسيرة الدكتور ورسالته في نشر نظام الطيبات، قبل الانتقال مباشرة إلى رفع الصورة والتحليل.
+            <div className="border-2 border-[#FF5722] bg-[#FF5722]/10 p-3">
+              <p className="text-xs font-bold leading-6 text-white/84">
+                الانتقال الآن إلى شاشة المسح ورفع الصورة.
               </p>
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             <div className="h-1.5 w-full overflow-hidden border border-white/20 bg-white/10">
-              <div className="h-full w-full origin-right animate-[mobile-splash-progress_3s_linear_forwards] bg-[#FF5722]" />
+              <div className="h-full w-full origin-right animate-[mobile-splash-progress_1.5s_linear_forwards] bg-[#FF5722]" />
             </div>
-            <p className="text-center text-xs font-bold tracking-[0.2em] text-white/45">
-              LOADING SCANNER
+            <p className="text-center text-[10px] font-bold tracking-[0.18em] text-white/45">
+              OPENING SCANNER
             </p>
           </div>
         </section>

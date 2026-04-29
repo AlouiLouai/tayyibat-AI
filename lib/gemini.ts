@@ -2,17 +2,16 @@ import "server-only";
 
 import { env } from "@/lib/env";
 
-type VisionResult = {
+export type VisionResult = {
   meal_name_ar: string;
   ingredients_ar: string[];
-  brief_assessment_ar: string;
 };
 
-function stripCodeFences(text: string) {
+export function stripCodeFences(text: string) {
   return text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```$/i, "").trim();
 }
 
-function extractText(data: any) {
+export function extractText(data: any) {
   const parts = data?.candidates?.[0]?.content?.parts;
 
   if (!Array.isArray(parts)) {
@@ -58,17 +57,64 @@ export async function embedText(text: string) {
   return values;
 }
 
-export async function analyzeMealImage(input: {
+export async function embedTexts(texts: string[]) {
+  if (texts.length === 0) {
+    return [];
+  }
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents?key=${env.geminiApiKey}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        requests: texts.map((text) => ({
+          model: "models/gemini-embedding-001",
+          taskType: "RETRIEVAL_QUERY",
+          outputDimensionality: 768,
+          content: {
+            parts: [{ text }],
+          },
+        })),
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    return Promise.all(texts.map((text) => embedText(text)));
+  }
+
+  const data = await response.json();
+  const embeddings = data?.embeddings;
+
+  if (!Array.isArray(embeddings) || embeddings.length !== texts.length) {
+    return Promise.all(texts.map((text) => embedText(text)));
+  }
+
+  return embeddings.map((entry) => {
+    const values = entry?.values;
+
+    if (!Array.isArray(values) || values.length !== 768) {
+      throw new Error("Unexpected batch embedding response from Gemini");
+    }
+
+    return values as number[];
+  });
+}
+
+export async function analyzeMealImageWithGemini(input: {
   mimeType: string;
   base64Data: string;
   note?: string;
 }) {
   const prompt = [
-    "حلل الصورة غذائياً وفقاً لمحتواها الظاهر فقط.",
-    "استخرج اسم الوجبة وأقرب المكونات المرئية بصياغة عربية قصيرة ومباشرة.",
-    "إذا كانت الصورة لمنتج معبأ فاذكر المنتج وأهم مكوناته المتوقعة من الصورة.",
-    "أعد النتيجة بصيغة JSON فقط دون أي شرح إضافي.",
-    'استخدم الشكل التالي حرفياً: {"meal_name_ar":"...","ingredients_ar":["..."],"brief_assessment_ar":"..."}',
+    "حدد اسم الوجبة أو المنتج من الصورة.",
+    "استخرج المكونات الظاهرة أو الأوضح فقط، بحد أقصى 5 مكونات.",
+    "إذا كانت الصورة لمنتج معبأ فاذكر اسم المنتج وأهم مكوناته المتوقعة من العبوة.",
+    "لا تكتب شرحاً أو تقييماً أو أي نص خارج JSON.",
+    'استخدم الشكل التالي حرفياً: {"meal_name_ar":"...","ingredients_ar":["..."]}',
     input.note ? `ملاحظة المستخدم: ${input.note}` : null,
   ]
     .filter(Boolean)
@@ -84,7 +130,8 @@ export async function analyzeMealImage(input: {
       body: JSON.stringify({
         generationConfig: {
           responseMimeType: "application/json",
-          temperature: 0.2,
+          maxOutputTokens: 160,
+          temperature: 0,
         },
         contents: [
           {
@@ -118,6 +165,7 @@ export async function analyzeMealImage(input: {
     ingredients_ar: Array.isArray(parsed.ingredients_ar)
       ? parsed.ingredients_ar.filter(Boolean)
       : [],
-    brief_assessment_ar: parsed.brief_assessment_ar || "",
   };
 }
+
+export const analyzeMealImage = analyzeMealImageWithGemini;
