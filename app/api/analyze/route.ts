@@ -1,22 +1,18 @@
 import { NextResponse } from "next/server";
 
-import { embedTexts } from "@/lib/gemini";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { buildMealAssessment, type MatchRow } from "@/lib/tayyibat";
 import { analyzeMealImage } from "@/lib/vision";
+import { env } from "@/lib/env";
 
 export const runtime = "edge";
 export const preferredRegion = "auto";
 
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 
-function toVectorLiteral(values: number[]) {
-  return `[${values.join(",")}]`;
-}
-
 type BulkMatchRow = MatchRow & {
   ingredient: string;
-  match_source: "exact" | "search_text" | "vector";
+  match_source: "exact" | "search_text";
 };
 
 type KnowledgeRow = MatchRow & {
@@ -41,11 +37,9 @@ type CacheEntry<T> = {
 };
 
 const ANALYSIS_CACHE_TTL_MS = 5 * 60 * 1000;
-const EMBEDDING_CACHE_TTL_MS = 30 * 60 * 1000;
 const KNOWLEDGE_CACHE_TTL_MS = 5 * 60 * 1000;
 
 const analysisCache = new Map<string, CacheEntry<AnalysisResponse>>();
-const embeddingCache = new Map<string, CacheEntry<number[]>>();
 let knowledgeCache: CacheEntry<KnowledgeRow[]> | null = null;
 
 function arrayBufferToBase64(arrayBuffer: ArrayBuffer) {
@@ -169,55 +163,32 @@ async function matchIngredientsByText(ingredients: string[]) {
   return matches;
 }
 
-async function getEmbeddingsForIngredients(ingredients: string[]) {
-  const orderedEmbeddings = new Array<number[]>(ingredients.length);
-  const uncachedIngredients: string[] = [];
-  const uncachedIndexes: number[] = [];
-
-  ingredients.forEach((ingredient, index) => {
-    const cachedEmbedding = getCachedValue(embeddingCache, ingredient);
-
-    if (cachedEmbedding) {
-      orderedEmbeddings[index] = cachedEmbedding;
-      return;
-    }
-
-    uncachedIngredients.push(ingredient);
-    uncachedIndexes.push(index);
-  });
-
-  if (uncachedIngredients.length > 0) {
-    const fetchedEmbeddings = await embedTexts(uncachedIngredients);
-
-    fetchedEmbeddings.forEach((embedding, index) => {
-      const ingredient = uncachedIngredients[index];
-      const targetIndex = uncachedIndexes[index];
-
-      setCachedValue(embeddingCache, ingredient, embedding, EMBEDDING_CACHE_TTL_MS);
-      orderedEmbeddings[targetIndex] = embedding;
-    });
-  }
-
-  return orderedEmbeddings;
-}
-
 async function matchIngredientsByEmbedding(ingredients: string[]) {
-  if (ingredients.length === 0) {
-    return [] as BulkMatchRow[];
+  if (ingredients.length === 0) return [] as BulkMatchRow[];
+
+  const knowledgeRows = await getKnowledgeRows();
+  const matches: BulkMatchRow[] = [];
+
+  for (const ingredient of ingredients) {
+    const normalized = normalizeText(ingredient);
+    
+    const searchTextMatch = knowledgeRows.find((row) => {
+      if (!row.search_text_ar) return false;
+      const searchNormalized = normalizeText(row.search_text_ar);
+      return searchNormalized.includes(normalized) || normalized.includes(searchNormalized.split(" ")[0]);
+    });
+
+    if (searchTextMatch) {
+      matches.push({
+        ...searchTextMatch,
+        ingredient,
+        similarity: 0.75,
+        match_source: "search_text",
+      });
+    }
   }
 
-  const embeddings = await getEmbeddingsForIngredients(ingredients);
-  const { data, error } = await supabaseAdmin.rpc("match_rag_ingredients", {
-    query_ingredients: ingredients,
-    query_embeddings: embeddings.map((embedding) => toVectorLiteral(embedding)),
-    min_similarity: 0.58,
-  });
-
-  if (error) {
-    throw error;
-  }
-
-  return (Array.isArray(data) ? data : []) as BulkMatchRow[];
+  return matches;
 }
 
 async function createAnalysisCacheKey(imageBuffer: ArrayBuffer, note: string) {
@@ -233,6 +204,14 @@ async function createAnalysisCacheKey(imageBuffer: ArrayBuffer, note: string) {
 }
 
 export async function POST(request: Request) {
+  if (!env.isConfigured()) {
+    const missing = env.getMissingKeys();
+    return NextResponse.json(
+      { error: `التطبيق غير مُعد. المفاتيح المفقودة: ${missing.join("، ")}` },
+      { status: 503 }
+    );
+  }
+
   try {
     const formData = await request.formData();
     const image = formData.get("image");
@@ -265,11 +244,29 @@ export async function POST(request: Request) {
       });
     }
 
-    const vision = await analyzeMealImage({
-      mimeType: image.type || "image/jpeg",
-      base64Data: arrayBufferToBase64(imageBuffer),
-      note,
-    });
+    let vision;
+    try {
+      vision = await analyzeMealImage({
+        mimeType: image.type || "image/jpeg",
+        base64Data: arrayBufferToBase64(imageBuffer),
+        note,
+      });
+    } catch (visionError) {
+      const msg = visionError instanceof Error ? visionError.message : "";
+      if (msg.includes("fetch") || msg.includes("network") || msg.includes("ENOTFOUND")) {
+        return NextResponse.json(
+          { error: "تعذر الاتصال بخدمة الرؤية. تحقق من الاتصال أو أعد المحاولة." },
+          { status: 502 }
+        );
+      }
+      if (msg.includes("timeout") || msg.includes("ETIMEDOUT")) {
+        return NextResponse.json(
+          { error: "انتهت مهلة الاتصال. حاول مجدداً." },
+          { status: 504 }
+        );
+      }
+      throw visionError;
+    }
 
     const uniqueIngredients = Array.from(
       new Set(vision.ingredients_ar.map((ingredient) => ingredient.trim()).filter(Boolean))
@@ -330,11 +327,25 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
-    console.error(error);
+    console.error("Analysis error:", error);
+    const message = error instanceof Error ? error.message : "خطأ غير معروف";
+
+    if (message.includes("fetch") || message.includes("network") || message.includes("ENOTFOUND")) {
+      return NextResponse.json(
+        { error: "تعذر الاتصال بخدمة الرؤية. تحقق من الاتصال أو أعد المحاولة." },
+        { status: 502 }
+      );
+    }
+
+    if (message.includes("timeout") || message.includes("ETIMEDOUT")) {
+      return NextResponse.json(
+        { error: "انتهت مهلة الاتصال. حاول مجدداً." },
+        { status: 504 }
+      );
+    }
+
     return NextResponse.json(
-      {
-        error: "تعذر تحليل الصورة حالياً. تحقق من المفاتيح أو أعد المحاولة بصورة أوضح.",
-      },
+      { error: "حدث خطأ في التحليل. تحقق من المفاتيح وأعد المحاولة." },
       { status: 500 }
     );
   }

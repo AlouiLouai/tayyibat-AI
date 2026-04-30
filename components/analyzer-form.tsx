@@ -256,7 +256,14 @@ export function AnalyzerForm() {
           <CardContent className="p-0">
             {previewUrl ? (
               <div className="relative h-[240px] w-full">
-                <Image alt="معاينة الوجبة" className="object-cover" fill sizes="(max-width: 1280px) 100vw, 50vw" src={previewUrl} unoptimized />
+                <Image 
+                  alt="معاينة الوجبة" 
+                  className="object-cover" 
+                  fill 
+                  sizes="(max-width: 1280px) 100vw, 50vw" 
+                  src={previewUrl}
+                  unoptimized={previewUrl.startsWith("blob:")}
+                />
               </div>
             ) : (
               <div className="flex h-[240px] flex-col items-center justify-center gap-3 p-6 text-center text-white/70">

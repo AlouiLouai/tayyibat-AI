@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { AnalyzerForm } from "@/components/analyzer-form";
 import { Badge } from "@/components/ui/badge";
+import { DhiaImage } from "@/components/dhia-image";
 
 const MOBILE_SPLASH_SESSION_KEY = "tayyibat-mobile-splash-seen";
 const MOBILE_SPLASH_DURATION_MS = 1500;
@@ -69,14 +69,7 @@ export default function HomePage() {
           <div className="space-y-3">
             <div className="mx-auto w-full max-w-[280px] border-2 border-white/20 bg-white/5 p-2">
               <div className="relative aspect-[4/5] w-full overflow-hidden border-2 border-white/20">
-                <Image
-                  alt="الدكتور ضياء العوضي"
-                  className="object-cover grayscale"
-                  fill
-                  priority
-                  sizes="100vw"
-                  src="/Dhia.jpg"
-                />
+                <DhiaImage priority className="!absolute inset-0" />
               </div>
             </div>
 
@@ -133,14 +126,7 @@ export default function HomePage() {
         <section className="hidden gap-6 border-2 border-border bg-card px-6 py-6 shadow-panel md:grid lg:grid-cols-[320px_1fr]">
           <div className="border-2 border-border bg-black p-2">
             <div className="relative aspect-[4/5] w-full overflow-hidden border-2 border-white/20">
-              <Image
-                alt="الدكتور ضياء العوضي"
-                className="object-cover grayscale"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 320px"
-                src="/Dhia.jpg"
-              />
+              <DhiaImage priority className="!absolute inset-0" />
             </div>
           </div>
 
