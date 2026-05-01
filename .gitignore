@@ -14,3 +14,4 @@ scripts/
 opencode.json
 docs/*
 .agents/*
+migrations/*

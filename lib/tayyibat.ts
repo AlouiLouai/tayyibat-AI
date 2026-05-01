@@ -137,13 +137,13 @@ export function buildMealAssessment(matches: Array<{ ingredient: string; match: 
 
   const alternative = forbidden.length
     ? Array.from(
-        new Set(forbidden.map((item) => item.match.alternative_ar ?? "أرز أو بطاطس أو لحم ضاني"))
+        new Set(forbidden.map((item) => item.match.alternative_ar ?? "لحم بقر أو أرز أبيض أو سمن حيواني"))
       ).join("، ")
     : caution.length
       ? Array.from(
-          new Set(caution.map((item) => item.match.alternative_ar ?? "أرز أو بطاطس أو لحم ضاني"))
+          new Set(caution.map((item) => item.match.alternative_ar ?? "لحم بقر أو أرز أبيض أو سمن حيواني"))
         ).join("، ")
-      : "استمر على النشويات الأساسية والدهون الطبيعية والبروتينات المسموحة.";
+      : "استمر على اللحوم الحمراء والنشويات والدهون الطبيعية المسموحة.";
 
   const healthContext = buildHealthContext(note, matches);
   score = Math.max(0, Math.min(100, score - healthContext.scorePenalty));
